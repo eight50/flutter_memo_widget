@@ -33,24 +33,6 @@ class AppWidgetProvider : HomeWidgetProvider() {
 
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
-
-            /*appWidgetManager.updateAppWidget(appWidgetId, views)
-        appWidgetIds.forEach { appWidgetId ->
-            updateAnAppWidget(context, appWidgetManager, appWidgetId)
-
-             */
         }
     }
-}
-
-internal fun updateAnAppWidget(
-    context: Context,
-    appWidgetManager: AppWidgetManager,
-    appWidgetId: Int
-) {
-    val appWidgetData = context.getSharedPreferences("WidgetText", Context.MODE_PRIVATE)
-    val appWidgetText = appWidgetData.getString(appWidgetId.toString(), "")
-
-    val views = RemoteViews(context.packageName, R.layout.widget_layout)
-    views.setTextViewText(R.id.widget_message, appWidgetData.getString("message", null)?: "No Set message")
 }

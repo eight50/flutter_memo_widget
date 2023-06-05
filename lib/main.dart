@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-final messageProvider = StateProvider((_) => "Message");
+final appWidgetIdProvider = StateProvider((ref) => "appWidgetId");
+final messageProvider = StateProvider((ref) => "Message");
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
-
+void main(List<String> arguments) {
+  runApp(ProviderScope(child:MyApp(arguments: arguments)));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends ConsumerWidget {
+  final List<String> arguments;
+  const MyApp({Key? key, required this.arguments}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    //if(appWidgetId.isNotEmpty) ref.read(appWidgetIdProvider.notifier).state = appWidgetId[0];
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -34,7 +36,7 @@ class HomeScreenWidget extends ConsumerStatefulWidget {
 class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   final messageController = TextEditingController();
 
-  // ウィジェットにデータを送る処理
+  // send data to widget
   Future<void> _sendData() async {
     await Future.wait([
       HomeWidget.saveWidgetData<String>('title', "Widget Title"), //'id', 'data'
@@ -42,7 +44,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     ]);
   }
 
-  // ウィジェットを更新する処理
+  // update widget
   Future<void> _updateWidget() async {
     await HomeWidget.updateWidget(
       name: 'AppWidgetProvider',
@@ -55,7 +57,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("HomeScreenWidget App"),
+        title: Text(ref.watch(appWidgetIdProvider).toString()),
       ),
       body: Center(
         child: Padding(

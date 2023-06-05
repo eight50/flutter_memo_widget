@@ -15,24 +15,27 @@ class MainActivity: FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val appWidgetId = intent?.extras?.getInt(
-            AppWidgetManager.EXTRA_APPWIDGET_ID,
-            AppWidgetManager.INVALID_APPWIDGET_ID
-        ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
+        val appWidgetId = intent?.extras?.getInt("appWidgetId")
+
+        val dartVMArgs : Array<String> = arrayOf(appWidgetId.toString())
 
         // Instantiate a FlutterEngine.
-        val flutterEngine = FlutterEngine(this)
+        val flutterEngine = FlutterEngine(this, dartVMArgs)
 
+        println(dartVMArgs)
+
+        /*
         startActivity(
             FlutterActivity
                 .withNewEngine()
-                .initialRoute("lib")
+                .initialRoute("/")
                 .build(this)
         )
+         */
 
-        /*
+        //キャッシュしたFlutter画面を表示するようにする。
         //Configure an initial route
-        flutterEngine.navigationChannel.setInitialRoute("/lib")
+        flutterEngine.navigationChannel.setInitialRoute("/")
 
         // Start executing Dart code to pre-warm the FlutterEngine.
         flutterEngine.dartExecutor.executeDartEntrypoint(
@@ -47,6 +50,6 @@ class MainActivity: FlutterActivity() {
         startActivity(FlutterActivity
             .withCachedEngine("my_engine_id")
             .build(this))
-        */
+
     }
 }
