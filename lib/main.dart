@@ -16,7 +16,7 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //if(appWidgetId.isNotEmpty) ref.read(appWidgetIdProvider.notifier).state = appWidgetId[0];
+    //if(arguments.isNotEmpty) ref.read(appWidgetIdProvider.notifier).state = arguments[0].toString();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
