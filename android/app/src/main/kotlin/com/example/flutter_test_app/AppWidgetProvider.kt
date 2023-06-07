@@ -16,8 +16,8 @@ class AppWidgetProvider : HomeWidgetProvider() {
             // Create an Intent to launch ExampleActivity
             val pendingIntent: PendingIntent = Intent(context, MainActivity::class.java)
                 .let { intent ->
+                    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
                     //requestCodeにappWidgetIdを入れて、区別する
-                    intent.putExtra("appWidgetId", appWidgetId)
                     PendingIntent.getActivity(context, appWidgetId, intent, 0)
                 }
 

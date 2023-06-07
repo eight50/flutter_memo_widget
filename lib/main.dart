@@ -6,6 +6,7 @@ final appWidgetIdProvider = StateProvider((ref) => "appWidgetId");
 final messageProvider = StateProvider((ref) => "Message");
 
 void main(List<String> arguments) {
+  print('$arguments');
   runApp(ProviderScope(child:MyApp(arguments: arguments)));
 }
 
