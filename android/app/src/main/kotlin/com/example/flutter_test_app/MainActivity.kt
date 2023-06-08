@@ -14,12 +14,8 @@ import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        lateinit var flutterEngine : FlutterEngine
 
         val appWidgetId = intent?.extras?.getInt(
             AppWidgetManager.EXTRA_APPWIDGET_ID,
@@ -33,21 +29,6 @@ class MainActivity: FlutterActivity() {
         println(dartVMArgs.size)
         println(dartVMArgs[0])
 
-        /*
-        //FlutterVMに引数を渡すためには、FlutterEngineを構築する前に初期化引数を手動設定する。詳細は、FlutterEngineをCtrl+Click
-        val flutterLoader = FlutterLoader().apply {
-            // ネイティブシステムの初期化開始
-            startInitialization(context)
-            // ネイティブシステムの初期化が完了するまでブロック(context, String[] args : Flags sent to the Flutter runtime)
-            ensureInitializationComplete(context, arrayOf())
-        }
-
-         */
-
-        // Instantiate a FlutterEngine.
-        //flutterEngine = FlutterEngine(context, dartVMArgs)
-
-
         startActivity(
             FlutterActivity
                 .withNewEngine()
@@ -56,9 +37,22 @@ class MainActivity: FlutterActivity() {
                 .build(this)
         )
 
-
         /*
-            CachedEngineには、EXTRA_DART_ENTRYPOINT_ARGSが無いため、引数を渡せない？
+            FlutterEngineCacheには、EXTRA_DART_ENTRYPOINT_ARGSが無いため、引数を渡せない？
+
+        lateinit var flutterEngine : FlutterEngine
+
+        //FlutterVMに引数を渡すためには、FlutterEngineを構築する前に初期化引数を手動設定する。詳細は、FlutterEngineをCtrl+Click
+        val flutterLoader = FlutterLoader().apply {
+            // ネイティブシステムの初期化開始
+            startInitialization(context)
+            // ネイティブシステムの初期化が完了するまでブロック(context, String[] args : Flags sent to the Flutter runtime)
+            ensureInitializationComplete(context, arrayOf())
+        }
+
+        // Instantiate a FlutterEngine.
+        //flutterEngine = FlutterEngine(context, dartVMArgs)
+
         // キャッシュしたFlutter画面を表示するようにする。
         // Configure an initial route
         flutterEngine.navigationChannel.setInitialRoute("/")

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetProvider
-
 import es.antonborri.home_widget.HomeWidgetLaunchIntent
 
 class AppWidgetProvider : HomeWidgetProvider() {
@@ -21,14 +20,16 @@ class AppWidgetProvider : HomeWidgetProvider() {
                     PendingIntent.getActivity(context, appWidgetId, intent, 0)
                 }
 
-            // Get the layout for the App Widget and attach an on-click listener
-            // to the button
+            //SharedPreferencesの名前は、home_widget/.../HomeWidgetPlugin.ktを確認
+            val sharedPref = context.getSharedPreferences("HomeWidgetPreferences", Context.MODE_PRIVATE)
+
             //PendingIntentで、"widget_container"にMainActivityをActiveにする権利を付与
             val views: RemoteViews = RemoteViews(
                 context.packageName,
                 R.layout.widget_layout
             ).apply {
                 setOnClickPendingIntent(R.id.widget_container, pendingIntent)
+                setTextViewText(R.id.widget_text, sharedPref.getString(appWidgetId.toString(), "No text"))
             }
 
             // Tell the AppWidgetManager to perform an update on the current app widget
