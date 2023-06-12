@@ -39,6 +39,7 @@ class MainActivity: FlutterActivity() {
 
         /*
             FlutterEngineCacheには、EXTRA_DART_ENTRYPOINT_ARGSが無いため、引数を渡せない？
+            複数のEngineを起動する必要あり？
 
         lateinit var flutterEngine : FlutterEngine
 
