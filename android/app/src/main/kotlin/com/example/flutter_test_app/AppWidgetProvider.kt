@@ -15,7 +15,7 @@ class AppWidgetProvider : HomeWidgetProvider() {
             val pendingIntent: PendingIntent = Intent(context, MainActivity::class.java)
                 .let { intent ->
                     intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-                    //requestCodeにappWidgetIdを入れて、区別する
+                    //requestCodeにappWidgetIdを入れて、区別（PendingIntentを上書きさせない）
                     PendingIntent.getActivity(context, appWidgetId, intent, 0)
                 }
 
@@ -26,11 +26,15 @@ class AppWidgetProvider : HomeWidgetProvider() {
             ).apply {
                 setOnClickPendingIntent(R.id.widget_container, pendingIntent)
                 //HomeWidgetProviderを継承しているので、onUpdate内でSharedPreferencesが扱える。
-                setTextViewText(R.id.widget_text, widgetData.getString("${appWidgetId}_text", "No text"))
+                setTextViewText(R.id.widget_text, widgetData.getString(getAppWidgetTextId(appWidgetId), "No text"))
             }
 
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
+    }
+
+    private fun getAppWidgetTextId(appWidgetId : Int) : String {
+        return "${appWidgetId}_text"
     }
 }

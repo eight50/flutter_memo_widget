@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-int? appWidgetId = -1;
+int? clickedAppWidgetId = -1;
 final memoTextProvider = StateProvider((ref) => "text");
 
 void main(List<String> arguments) {
   if (arguments.isNotEmpty) {
-    appWidgetId = int.parse(arguments[0]);
+    clickedAppWidgetId = int.parse(arguments[0]);
   }
   runApp(const ProviderScope(child:MyApp()));
 }
@@ -37,11 +37,17 @@ class HomeScreenWidget extends ConsumerStatefulWidget {
 class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   final _messageController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    setPreviousTextToTextEditingController();
+  }
+
   // send data to widget
   Future<void> _sendData() async {
     await Future.wait([
-      HomeWidget.saveWidgetData<String>('${appWidgetId}_title', '$appWidgetId'), //'id', 'data'
-      HomeWidget.saveWidgetData<String>('${appWidgetId}_text', ref.read(memoTextProvider)),
+      HomeWidget.saveWidgetData<String>(getAppWidgetTextId(clickedAppWidgetId), '$clickedAppWidgetId'), //'id', 'data'
+      HomeWidget.saveWidgetData<String>(getAppWidgetTextId(clickedAppWidgetId), ref.read(memoTextProvider)),
     ]);
   }
 
@@ -54,20 +60,30 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
     );
   }
 
-  Future _loadData() async {
-      return Future.wait([
-        HomeWidget.getWidgetData<String>(appWidgetId.toString(),
-            defaultValue: 'No text')
-      ]);
+  Future<String?> _loadData() async {
+      var preText = await HomeWidget.getWidgetData(getAppWidgetTextId(clickedAppWidgetId), defaultValue: 'No text');
+      return preText;
+  }
+
+  String getAppWidgetTextId(int? appWidgetId) {
+    return "${appWidgetId}_text";
+  }
+
+  void setPreviousTextToTextEditingController() {
+    _loadData().then((preText) {
+      setState(() {
+        _messageController.text = preText.toString();
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(appWidgetId.toString()),
+        title: Text(clickedAppWidgetId.toString()),
       ),
-      body: Center(
+      body:Center(
         child: Padding(
           padding: const EdgeInsets.all(30),
           child: Column(
@@ -75,14 +91,10 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
             children: [
               TextField(
                 decoration: const InputDecoration(
-                  label: Text('display to widget'),
+                  label: Text('memo_text'),
                   border: OutlineInputBorder(),
                 ),
                 controller: _messageController,
-              ),
-              ElevatedButton(
-                onPressed: _loadData,
-                child: const Text('Load Data'),
               ),
               ElevatedButton(
                 onPressed: () async {
