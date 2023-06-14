@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -37,6 +38,7 @@ class HomeScreenWidget extends ConsumerStatefulWidget {
 class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   final _messageController = TextEditingController();
 
+  // initState()内では非同期処理できないため、_loadData()内でawaitし、<String?>形式で返さなければならない。
   @override
   void initState() {
     super.initState();
@@ -90,6 +92,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextField(
+                autofocus: true,
                 decoration: const InputDecoration(
                   label: Text('memo_text'),
                   border: OutlineInputBorder(),
@@ -102,6 +105,8 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                       _messageController.text;
                   _sendData();
                   _updateWidget();
+                  // アクティビティをスタックから削除し、前のアクティビティを返す。（exitよりもこちらが推奨）
+                  SystemNavigator.pop();
                 },
                 child: const Text('Update widget'),
               )
