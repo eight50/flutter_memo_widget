@@ -8,7 +8,7 @@ androidのホームスクリーン上にメモを作る。
 ## 学んだこと
 ・ホームウィジェット（android）についての基礎知識  
 ・intent, PendingIntent  
-・androidのライフサイクル  
+・androidアプリのライフサイクル  
 ・flutterについての基礎知識  
 ・flutterでの非同期処理  
 ・flutterでのdartVM  
@@ -20,6 +20,8 @@ androidのホームスクリーン上にメモを作る。
 ・テキスト入力時に、改行できるようにする  
 ・テキスト入力画面のレイアウト調整  
 ・スプラッシュ画面の作成  
+・appWidgetId=-1に初期化した時、flutterの画面が2つ生成されてしまう原因調査
+・DataStoreを用いたデータ管理
 
 ## 課題点
 ### FlutterEngineを使用してウィジェットの押下毎にdartVMを作成しているため、起動が遅い。
