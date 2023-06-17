@@ -40,7 +40,7 @@ class MainActivity: FlutterActivity() {
         finish()
 
         /*
-            FlutterEngineCacheには、EXTRA_DART_ENTRYPOINT_ARGSが無いため、引数を渡せない？
+            FlutterEngineCacheでは、引数を渡せない？
             複数のEngineを起動する必要あり？
 
         lateinit var flutterEngine : FlutterEngine
@@ -53,11 +53,9 @@ class MainActivity: FlutterActivity() {
             ensureInitializationComplete(context, arrayOf())
         }
 
-        // Instantiate a FlutterEngine.
         //flutterEngine = FlutterEngine(context, dartVMArgs)
 
         // キャッシュしたFlutter画面を表示するようにする。
-        // Configure an initial route
         flutterEngine.navigationChannel.setInitialRoute("/")
 
         // Start executing Dart code to pre-warm the FlutterEngine.
@@ -65,7 +63,6 @@ class MainActivity: FlutterActivity() {
             DartExecutor.DartEntrypoint(flutterLoader.findAppBundlePath(),"main")
         )
 
-        // Cache the FlutterEngine to be used by FlutterActivity.
         FlutterEngineCache
             .getInstance()
             .put("createdFlutterEngine", flutterEngine)
@@ -76,7 +73,8 @@ class MainActivity: FlutterActivity() {
             .build(context)
         )
 
+        */
 
-         */
+
     }
 }

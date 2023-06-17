@@ -1,16 +1,21 @@
-# flutter_test_app
+flutter, android 勉強用
 
-A new Flutter test project.
+# flutter_widget_memo
 
-## Getting Started
+androidのホームスクリーン上にメモを作る。
+ウィジェットごとに異なる内容を記述できる。
 
-This project is a starting point for a Flutter application.
+## Todo
+アーキテクチャを意識して、ファイル構造を変える
+ウィジェットを簡単に生成できるボタンの作成
+スプラッシュ画面の作成
 
-A few resources to get you started if this is your first Flutter project:
+## 課題点
+### FlutterEngineを使用してウィジェットの押下毎にdartVMを作成しているため、起動が遅い。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+解決候補
+〇CachedEngineを使用して、編集画面をキャッシュに保存しておく。
+→FlutterEngine作成時に、dartVMArgs[]を引数に渡し、キャッシュに保存すれば引数を渡せる？
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+〇flutterのFutureBuilderを使用。
+→FutureBuilderを使用して、intentを新しく受け取ったら画面を更新？
