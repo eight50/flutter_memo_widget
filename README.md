@@ -5,12 +5,21 @@ flutter, android 勉強用
 androidのホームスクリーン上にメモを作る。  
 ウィジェットごとに異なる内容を記述できる。  
 
+## 学んだこと
+・ホームウィジェット（android）についての基礎知識  
+・intent, PendingIntent  
+・androidのライフサイクル  
+・flutterについての基礎知識  
+・flutterでの非同期処理  
+・flutterでのdartVM  
+・flutterとネイティブ側との接続方法(MethodChannel, FlutterEngine)  
+
 ## Todo
-アーキテクチャを意識して、ファイル構造を変える  
-ウィジェットを簡単に生成できるボタンの作成  
-テキスト入力時に、改行できるようにする  
-テキスト入力画面のレイアウト調整  
-スプラッシュ画面の作成  
+・アーキテクチャを意識して、ファイル構造を変える  
+・ウィジェットを簡単に生成できるボタンの作成  
+・テキスト入力時に、改行できるようにする  
+・テキスト入力画面のレイアウト調整  
+・スプラッシュ画面の作成  
 
 ## 課題点
 ### FlutterEngineを使用してウィジェットの押下毎にdartVMを作成しているため、起動が遅い。
@@ -22,3 +31,6 @@ androidのホームスクリーン上にメモを作る。
 
 〇flutterのFutureBuilderを使用。  
 →FutureBuilderを使用して、intentを新しく受け取ったら画面を更新？  
+
+〇ビルドしたflutterアプリと接続（https://docs.flutter.dev/add-to-app）  
+→同じプロジェクト内で実現したい  
