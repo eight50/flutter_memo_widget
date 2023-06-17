@@ -1,6 +1,6 @@
 flutter, android 勉強用  
 
-# flutter_widget_memo
+# flutter_memo_widget
 
 androidのホームスクリーン上にメモを作る。  
 ウィジェットごとに異なる内容を記述できる。  
