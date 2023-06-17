@@ -93,7 +93,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
               TextField(
                 autofocus: true,
                 decoration: const InputDecoration(
-                  label: Text('memo_text'),
+                  label: Text('Memo Text'),
                   border: OutlineInputBorder(),
                 ),
                 controller: _messageController,
