@@ -36,7 +36,7 @@
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/> <!-- システムのアプリケーションLauncherに表示 -->
+                <!-- <category android:name="android.intent.category.LAUNCHER"/> システムのアプリケーションLauncherに表示 -->
             </intent-filter>
         </activity>
 

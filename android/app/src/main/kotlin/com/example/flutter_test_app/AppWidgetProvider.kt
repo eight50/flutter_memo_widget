@@ -25,7 +25,7 @@ class AppWidgetProvider : HomeWidgetProvider() {
                 R.layout.widget_layout
             ).apply {
                 setOnClickPendingIntent(R.id.widget_container, pendingIntent)
-                //HomeWidgetProviderを継承しているので、onUpdate内でSharedPreferencesが扱える。
+                //HomeWidgetProviderを継承しているので、onUpdate内でSharedPreferences（home_widgetパッケージと同じ'id'）が扱える。
                 setTextViewText(R.id.widget_text, widgetData.getString(getAppWidgetTextId(appWidgetId), "No text"))
             }
 

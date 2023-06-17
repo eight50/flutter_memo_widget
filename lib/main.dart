@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:home_widget/home_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-int? clickedAppWidgetId = -1;
+int? clickedAppWidgetId;
 final memoTextProvider = StateProvider((ref) => "text");
 
 void main(List<String> arguments) {
@@ -19,7 +19,6 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
       return MaterialApp(
-        title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
@@ -63,7 +62,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   }
 
   Future<String?> _loadData() async {
-      var preText = await HomeWidget.getWidgetData(getAppWidgetTextId(clickedAppWidgetId), defaultValue: 'No text');
+      var preText = await HomeWidget.getWidgetData(getAppWidgetTextId(clickedAppWidgetId), defaultValue: '');
       return preText;
   }
 
@@ -83,7 +82,7 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(clickedAppWidgetId.toString()),
+        title: Text('appWidgetId = ${clickedAppWidgetId.toString()}'),
       ),
       body:Center(
         child: Padding(
@@ -105,10 +104,11 @@ class _HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
                       _messageController.text;
                   _sendData();
                   _updateWidget();
-                  // アクティビティをスタックから削除し、前のアクティビティを返す。（exitよりもこちらが推奨）
+                  // アクティビティをスタックから削除し、前のアクティビティを返す。（exitよりもこちらが推奨）。
+                  // appWidgetId=-1の画面が表示されてしまう。→ clickedAppWidgetId=null,-1以外の負の数 に初期化したことで解決。appWidgetManager.INVALID_APPWIDGET_IDは0。-1だけ表示される理由不明。
                   SystemNavigator.pop();
                 },
-                child: const Text('Update widget'),
+                child: const Text('Update & Exit'),
               )
             ],
           ),
