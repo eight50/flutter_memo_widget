@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_test_app/main.dart';
+import 'package:flutter_memo_widget/main.dart';
 
 void main(List<String> arguments) {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

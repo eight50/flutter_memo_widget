@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_test_app">
+    package="com.example.flutter_memo_widget">
    <application
-        android:label="flutter_test_app"
+        android:label="flutter_memo_widget"
         android:icon="@mipmap/ic_launcher">
        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
         <!-- home_widget -->
-        <receiver android:name="AppWidgetProvider"
+        <receiver android:name="com.example.flutter_memo_widget.AppWidgetProvider"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>
@@ -19,7 +19,7 @@
         </receiver>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.flutter_memo_widget.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

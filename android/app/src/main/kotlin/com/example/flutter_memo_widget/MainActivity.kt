@@ -1,15 +1,8 @@
-package com.example.flutter_test_app
+package com.example.flutter_memo_widget
 
 import android.appwidget.AppWidgetManager
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import io.flutter.embedding.android.FlutterActivity
-import io.flutter.embedding.engine.dart.DartExecutor
-import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.embedding.engine.FlutterEngineCache
-import io.flutter.embedding.engine.loader.FlutterLoader
-import io.flutter.plugin.common.MethodChannel
 
 
 class MainActivity: FlutterActivity() {

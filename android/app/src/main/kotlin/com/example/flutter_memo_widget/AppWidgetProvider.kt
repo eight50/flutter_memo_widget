@@ -1,4 +1,4 @@
-package com.example.flutter_test_app
+package com.example.flutter_memo_widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Context
