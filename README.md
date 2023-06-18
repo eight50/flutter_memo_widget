@@ -7,6 +7,9 @@ androidのホームスクリーン上にメモを作る。
 ネイティブ側から、FlutterEngineを用いてテキスト編集画面を新規作成している。  
 appWidgetIdはdartVMの引数として渡している。  
 
+## demo
+![memo_widget_demo](https://github.com/eight50/flutter_memo_widget/assets/84005278/edd98bad-e586-45a4-b1a9-4fd5300ec025)  
+
 ## 学んだこと
 ・ホームウィジェット（android）についての基礎知識  
 ・intent, PendingIntent  
