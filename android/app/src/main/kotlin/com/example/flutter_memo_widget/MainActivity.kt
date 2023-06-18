@@ -14,12 +14,12 @@ class MainActivity: FlutterActivity() {
             AppWidgetManager.INVALID_APPWIDGET_ID
         ) ?: AppWidgetManager.INVALID_APPWIDGET_ID
 
-        //println(appWidgetId)
+        // println(appWidgetId)
 
         val dartVMArgs : List<String> = listOf(appWidgetId.toString())
 
-        println(dartVMArgs.size)
-        println(dartVMArgs[0])
+        // println(dartVMArgs.size)
+        // println(dartVMArgs[0])
 
         startActivity(
             FlutterActivity

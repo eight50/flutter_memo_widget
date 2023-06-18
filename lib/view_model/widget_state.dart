@@ -19,7 +19,6 @@ class HomeScreenWidgetState extends ConsumerState<HomeScreenWidget> {
   // send data to widget
   Future<void> _sendData() async {
     await Future.wait([
-      HomeWidget.saveWidgetData<String>(getAppWidgetTextId(clickedAppWidgetId), '$clickedAppWidgetId'), //'id', 'data'
       HomeWidget.saveWidgetData<String>(getAppWidgetTextId(clickedAppWidgetId), ref.read(memoTextProvider)),
     ]);
   }
